@@ -1,4 +1,4 @@
-# Hello World Button Homework
+# Natural Gas Homework
 This is a basic natural gas mobile application project.
 ![Screenshot of the app and the working environment.](/screen.jpg?raw=true "Screenshot")
 
