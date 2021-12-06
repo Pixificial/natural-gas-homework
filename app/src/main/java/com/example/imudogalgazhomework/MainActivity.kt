@@ -1,6 +1,7 @@
 package com.example.imudogalgazhomework
 
 import android.content.ContentValues
+import android.content.Intent
 import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteDatabase.openOrCreateDatabase
@@ -8,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Button
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -104,6 +107,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val db = initiateDatabase()
 
+        val continueButton : Button = findViewById(R.id.continue_button)
         val mainSpinner : Spinner = findViewById(R.id.main_spinner)
         val cRowCount = db.rawQuery("SELECT count(1) FROM kullanıcıProfili", null)
         cRowCount.moveToFirst()
@@ -125,5 +129,11 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, namessa)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mainSpinner.adapter = adapter
+
+        continueButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, SubscriberLoginActivity::class.java)
+            intent.putExtra("abone_adi", mainSpinner.selectedItem.toString())
+            startActivity(intent)
+        }
     }
 }
