@@ -108,6 +108,7 @@ class MainActivity : AppCompatActivity() {
         val db = initiateDatabase()
 
         val continueButton : Button = findViewById(R.id.continue_button)
+        val personnelButton : Button = findViewById(R.id.personnel_button)
         val mainSpinner : Spinner = findViewById(R.id.main_spinner)
         val cRowCount = db.rawQuery("SELECT count(1) FROM kullanıcıProfili", null)
         cRowCount.moveToFirst()
@@ -133,6 +134,10 @@ class MainActivity : AppCompatActivity() {
         continueButton.setOnClickListener {
             val intent = Intent(this@MainActivity, SubscriberLoginActivity::class.java)
             intent.putExtra("abone_adi", mainSpinner.selectedItem.toString())
+            startActivity(intent)
+        }
+        personnelButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, PersonnelLoginActivity::class.java)
             startActivity(intent)
         }
     }

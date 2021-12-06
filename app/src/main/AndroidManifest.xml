@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IMUDogalgazHomework">
         <activity
+            android:name=".PersonnelLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".SubscriberLoginActivity"
             android:exported="false" />
         <activity

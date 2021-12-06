@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SubscriberLoginActivity">
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:text="←"
+        android:textSize="22dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/brand_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="İMU DOĞALGAZ AŞ."
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/info_text_2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/system_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E-Doğalgaz Sistemi:"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/personnelnum_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/brand_text" />
+
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PERSONEL NO:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/personnelnum_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/continue_button"  />
+
+    <EditText
+        android:id="@+id/personnelnum_text"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/info_text_2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/info_text_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ŞİFRE:"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/continue_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/personnelpass_text"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/info_text_2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/continue_button"
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:text="Giriş"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/info_text_2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
