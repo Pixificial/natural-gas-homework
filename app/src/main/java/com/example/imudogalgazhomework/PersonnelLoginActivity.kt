@@ -10,11 +10,17 @@ class PersonnelLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personnel_login)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //val backButton : Button = findViewById(R.id.back_button)
         //backButton.setOnClickListener {
         //    val intent = Intent(this@PersonnelLoginActivity, MainActivity::class.java)
         //    startActivity(intent)
         //}
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

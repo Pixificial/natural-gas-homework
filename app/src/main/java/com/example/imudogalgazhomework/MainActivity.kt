@@ -16,7 +16,6 @@ import android.widget.Button
 class MainActivity : AppCompatActivity() {
 
     fun calculateToplamBorc(db : SQLiteDatabase, tableName : String): Float {
-        var i = 0;
         var toplamBorc : Float = 0.0F
         val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
         val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
@@ -28,6 +27,43 @@ class MainActivity : AppCompatActivity() {
         }
         return toplamBorc
     }
+
+    fun getAyM3Fiyati(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
+        val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
+        cM3Prices.moveToFirst()
+        var i : Int = 0
+        while (i < monthIndex) {
+            cM3Prices.moveToNext()
+            i += 1
+        }
+        return cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
+    }
+
+    fun getAyM3Kullanimi(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
+        val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
+        cMonthlyGasUsages.moveToFirst()
+        var i : Int = 0
+        while (i < monthIndex) {
+            cMonthlyGasUsages.moveToNext()
+            i += 1
+        }
+        return cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı"))
+    }
+
+    fun getAyFaturasi(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
+        val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
+        val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
+        cMonthlyGasUsages.moveToFirst()
+        cM3Prices.moveToFirst()
+        var i : Int = 0
+        while (i < monthIndex) {
+            cMonthlyGasUsages.moveToNext()
+            cM3Prices.moveToNext()
+            i += 1
+        }
+        return cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
+    }
+
     fun initiateDatabase(): SQLiteDatabase {
         val db = openOrCreateDatabase("dogalgaz_odev_1.db", 0,null)
 
@@ -244,17 +280,17 @@ class MainActivity : AppCompatActivity() {
 
             kp_1.put("AboneNo", "12345678")
             kp_1.put("AboneAdSoyad", "Ozan Arda Kazan")
-            kp_1.put("ToplamBorc", calculateToplamBorc(db, "AylıkFatura12345678"))
+            kp_1.put("ToplamBorc", calculateToplamBorc(db, "aylıkFatura12345678"))
             //vals_2.put("AylıkFatura", db.rawQuery("SELECT * FROM aylıkFatura", null))
 
             kp_2.put("AboneNo", "12345679")
             kp_2.put("AboneAdSoyad", "İlke Ata Kazan")
-            kp_2.put("ToplamBorc", calculateToplamBorc(db, "AylıkFatura12345679"))
+            kp_2.put("ToplamBorc", calculateToplamBorc(db, "aylıkFatura12345679"))
             //vals_2.put("AylıkFatura", db.rawQuery("SELECT * FROM aylıkFatura", null))
 
             kp_3.put("AboneNo", "12345670")
             kp_3.put("AboneAdSoyad", "Ersen Kazan")
-            kp_3.put("ToplamBorc", calculateToplamBorc(db, "AylıkFatura12345670"))
+            kp_3.put("ToplamBorc", calculateToplamBorc(db, "aylıkFatura12345670"))
 
             db.execSQL("CREATE TABLE IF NOT EXISTS kullanıcıProfili (AboneNo integer, AboneAdSoyad varchar(40), ToplamBorc float4)")
             db.insert("kullanıcıProfili", null, kp_1)
@@ -267,6 +303,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val db = initiateDatabase()
 
         val continueButton : Button = findViewById(R.id.continue_button)
@@ -311,25 +348,33 @@ class MainActivity : AppCompatActivity() {
                 }
                 i += 1
             }
-            val intent = Intent(this@MainActivity, SubscriberLoginActivity::class.java)
-            intent.putExtra("abone_adi", mainSpinner.selectedItem.toString())
-            intent.putExtra("abone_no", subNumberssa[i])
-            intent.putExtra("abone_borcu", totalPaymentsfa[i])
-            startActivity(intent)
+            val next_intent_1 = Intent(this@MainActivity, SubscriberLoginActivity::class.java)
+            next_intent_1.putExtra("abone_adi", mainSpinner.selectedItem.toString())
+            next_intent_1.putExtra("abone_no", subNumberssa[i])
+            next_intent_1.putExtra("abone_borcu", totalPaymentsfa[i])
+            next_intent_1.putExtra("ayin_m3_fiyati", getAyM3Fiyati(db, "aylıkFatura" + subNumberssa[i], 11))
+            next_intent_1.putExtra("ayin_m3_kullanimi", getAyM3Kullanimi(db, "aylıkFatura" + subNumberssa[i], 11))
+            next_intent_1.putExtra("ay_9_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 9))
+            next_intent_1.putExtra("ay_10_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 10))
+            next_intent_1.putExtra("ay_11_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 11))
+            startActivity(next_intent_1)
         }
-        personnelButton.setOnClickListener {
-            val next_intent = Intent(this@MainActivity, PersonnelLoginActivity::class.java)
-            startActivity(next_intent)
-        }
-    }
 
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
+        personnelButton.setOnClickListener {
+            val next_intent_2 = Intent(this@MainActivity, PersonnelLoginActivity::class.java)
+            startActivity(next_intent_2)
         }
-        return super.onContextItemSelected(item)
     }
+    //override fun onContextItemSelected(item: MenuItem): Boolean {
+    //    when (item.itemId) {
+    //        android.R.id.home -> {
+    //            onBackPressed()
+    //           finish()
+    //            return true
+    //        }
+    //    }
+    //    return super.onContextItemSelected(item)
+    //}
+
+
 }

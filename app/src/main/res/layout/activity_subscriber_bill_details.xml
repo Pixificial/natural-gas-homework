@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SubscriberBillDetailsActivity">
+
+    <TextView
+        android:id="@+id/system_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detay"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/info_text_2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/info_text_2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/info_text_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aralık Ayı Fatura"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/info_text_4"
+        app:layout_constraintLeft_toRightOf="@+id/info_text_3"
+        app:layout_constraintTop_toBottomOf="@+id/system_text" />
+
+    <TextView
+        android:id="@+id/info_text_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gaz m3 Fiyatı"
+        app:layout_constraintBottom_toTopOf="@+id/m3price_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/info_text_3"
+        app:layout_constraintTop_toBottomOf="@+id/info_text_1" />
+
+    <TextView
+        android:id="@+id/info_text_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bu ay kullanılan"
+        app:layout_constraintBottom_toTopOf="@+id/usedm3_text"
+        app:layout_constraintLeft_toRightOf="@+id/info_text_2"
+        app:layout_constraintRight_toLeftOf="@+id/info_text_4"
+        app:layout_constraintTop_toBottomOf="@+id/info_text_1" />
+
+    <TextView
+        android:id="@+id/info_text_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bu ayın faturası"
+        app:layout_constraintBottom_toTopOf="@+id/current_bill_text"
+        app:layout_constraintLeft_toRightOf="@+id/info_text_3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info_text_1" />
+
+    <TextView
+        android:id="@+id/m3price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/info_text_5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/usedm3_text"
+        app:layout_constraintTop_toTopOf="@+id/info_text_1" />
+
+    <TextView
+        android:id="@+id/usedm3_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/info_text_5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/info_text_1" />
+
+    <TextView
+        android:id="@+id/current_bill_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/info_text_5"
+        app:layout_constraintLeft_toRightOf="@+id/usedm3_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/info_text_1" />
+
+    <TextView
+        android:id="@+id/info_text_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MEVCUT BORÇ:"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/total_bill_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/total_bill_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/info_text_5"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/month_11_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aralık"
+        app:layout_constraintBottom_toBottomOf="@+id/month_10_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/total_bill_text"
+        app:layout_constraintTop_toBottomOf="@+id/info_text_5" />
+
+    <TextView
+        android:id="@+id/month_11_bill_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/month_10_bill_text"
+        app:layout_constraintStart_toStartOf="@+id/total_bill_text"
+        app:layout_constraintTop_toBottomOf="@+id/total_bill_text" />
+
+    <TextView
+        android:id="@+id/month_10_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kasım"
+        app:layout_constraintBottom_toBottomOf="@+id/month_9_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/total_bill_text"
+        app:layout_constraintTop_toTopOf="@+id/month_11_text" />
+
+    <TextView
+        android:id="@+id/month_10_bill_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/month_9_bill_text"
+        app:layout_constraintStart_toStartOf="@+id/total_bill_text"
+        app:layout_constraintTop_toTopOf="@+id/month_11_bill_text" />
+
+    <TextView
+        android:id="@+id/month_9_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ekim"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/total_bill_text"
+        app:layout_constraintTop_toTopOf="@+id/month_10_text" />
+
+    <TextView
+        android:id="@+id/month_9_bill_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/total_bill_text"
+        app:layout_constraintTop_toTopOf="@+id/month_10_bill_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

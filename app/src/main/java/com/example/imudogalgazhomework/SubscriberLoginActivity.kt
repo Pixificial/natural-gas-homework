@@ -11,6 +11,7 @@ class SubscriberLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subscriber_login)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val subNameText : TextView = findViewById(R.id.subname_text)
         val subNumText : TextView = findViewById(R.id.subnum_text)
@@ -31,6 +32,11 @@ class SubscriberLoginActivity : AppCompatActivity() {
                 next_intent.putExtra("abone_adi", intent.getStringExtra("abone_adi"))
                 next_intent.putExtra("abone_no", intent.getStringExtra("abone_no"))
                 next_intent.putExtra("abone_borcu", intent.getFloatExtra("abone_borcu", 0.0F))
+                next_intent.putExtra("ayin_m3_fiyati", intent.getFloatExtra("ayin_m3_fiyati", 0.0F))
+                next_intent.putExtra("ayin_m3_kullanimi", intent.getFloatExtra("ayin_m3_kullanimi", 0.0F))
+                next_intent.putExtra("ay_9_faturasi", intent.getFloatExtra("ay_9_faturasi", 0.0F))
+                next_intent.putExtra("ay_10_faturasi", intent.getFloatExtra("ay_10_faturasi", 0.0F))
+                next_intent.putExtra("ay_11_faturasi", intent.getFloatExtra("ay_11_faturasi", 0.0F))
                 startActivity(next_intent)
             }
         }
@@ -41,5 +47,8 @@ class SubscriberLoginActivity : AppCompatActivity() {
         //}
     }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }

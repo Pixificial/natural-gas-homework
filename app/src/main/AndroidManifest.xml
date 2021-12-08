@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IMUDogalgazHomework">
         <activity
+            android:name=".SubscriberBillDetailsActivity"
+            android:exported="false"
+            android:parentActivityName=".SubscriberMainActivity" />
+        <activity
             android:name=".SubscriberMainActivity"
             android:exported="false"
             android:parentActivityName=".SubscriberLoginActivity" />
