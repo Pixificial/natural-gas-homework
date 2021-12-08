@@ -11,11 +11,10 @@ class PersonnelLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personnel_login)
 
-        val backButton : Button = findViewById(R.id.back_button)
-
-        backButton.setOnClickListener {
-            val intent = Intent(this@PersonnelLoginActivity, MainActivity::class.java)
-            startActivity(intent)
-        }
+        //val backButton : Button = findViewById(R.id.back_button)
+        //backButton.setOnClickListener {
+        //    val intent = Intent(this@PersonnelLoginActivity, MainActivity::class.java)
+        //    startActivity(intent)
+        //}
     }
 }

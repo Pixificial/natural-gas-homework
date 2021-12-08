@@ -10,11 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IMUDogalgazHomework">
         <activity
+            android:name=".SubscriberMainActivity"
+            android:exported="false"
+            android:parentActivityName=".SubscriberLoginActivity" />
+        <activity
             android:name=".PersonnelLoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SubscriberLoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
