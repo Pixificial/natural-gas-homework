@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initiateDatabase(): SQLiteDatabase {
-        val db = openOrCreateDatabase("dogalgaz_odev_1.db", 0,null)
+        val db = openOrCreateDatabase("dogalgaz_odev_2.db", 0,null)
 
         val af_12345678_1 = ContentValues()
         val af_12345678_2 = ContentValues()
@@ -296,6 +296,21 @@ class MainActivity : AppCompatActivity() {
             db.insert("kullanıcıProfili", null, kp_1)
             db.insert("kullanıcıProfili", null, kp_2)
             db.insert("kullanıcıProfili", null, kp_3)
+
+            val pp_1 = ContentValues()
+            val pp_2 = ContentValues()
+
+            pp_1.put("PersonelNo", "45678912")
+            pp_1.put("PersonelSifre", "12345678")
+            pp_1.put("PersonelAdSoyad", "Serkan Sayacokuyan")
+
+            pp_2.put("PersonelNo", "45678913")
+            pp_2.put("PersonelSifre", "12345679")
+            pp_2.put("PersonelAdSoyad", "Semih Sayacokuyamayan")
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS personelProfili (PersonelNo integer, PersonelSifre varchar(40), PersonelAdSoyad varchar(40))")
+            db.insert("personelProfili", null, pp_1)
+            db.insert("personelProfili", null, pp_2)
         }
         return db;
     }
@@ -339,6 +354,37 @@ class MainActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mainSpinner.adapter = adapter
 
+        i = 0
+
+        val cPersonnelRowCount = db.rawQuery("SELECT count(1) FROM personelProfili", null)
+        cPersonnelRowCount.moveToFirst()
+        val personnelRowCount = cPersonnelRowCount.getInt(0)
+        cPersonnelRowCount.close()
+
+        val cPersonnelNumbers = db.rawQuery("SELECT PersonelNo FROM personelProfili", null)
+        val cPersonnelPasswords = db.rawQuery("SELECT PersonelSifre FROM personelProfili", null)
+        val cPersonnelNames = db.rawQuery("SELECT PersonelAdSoyad FROM personelProfili", null)
+
+        var personnelNumberssa = arrayOfNulls<String>(personnelRowCount)
+        var personnelPasswordssa = arrayOfNulls<String>(personnelRowCount)
+        var personnelNamessa = arrayOfNulls<String>(personnelRowCount)
+
+        cPersonnelNumbers.moveToFirst()
+        cPersonnelPasswords.moveToFirst()
+        cPersonnelNames.moveToFirst()
+
+        personnelNumberssa[i] = cPersonnelNumbers.getString(cPersonnelNumbers.getColumnIndexOrThrow("PersonelNo"))
+        personnelPasswordssa[i] = cPersonnelPasswords.getString(cPersonnelPasswords.getColumnIndexOrThrow("PersonelSifre"))
+        personnelNamessa[i] = cPersonnelNames.getString(cPersonnelNames.getColumnIndexOrThrow("PersonelAdSoyad"))
+
+        while (cPersonnelNumbers.moveToNext() && cPersonnelPasswords.moveToNext() && cPersonnelNames.moveToNext())
+        {
+            i += 1
+            personnelNumberssa[i] = cPersonnelNumbers.getString(cPersonnelNumbers.getColumnIndexOrThrow("PersonelNo"))
+            personnelPasswordssa[i] = cPersonnelPasswords.getString(cPersonnelPasswords.getColumnIndexOrThrow("PersonelSifre"))
+            personnelNamessa[i] = cPersonnelNames.getString(cPersonnelNames.getColumnIndexOrThrow("PersonelAdSoyad"))
+        }
+
         continueButton.setOnClickListener {
             var i = 0
             while(i < rowCount) {
@@ -362,6 +408,9 @@ class MainActivity : AppCompatActivity() {
 
         personnelButton.setOnClickListener {
             val next_intent_2 = Intent(this@MainActivity, PersonnelLoginActivity::class.java)
+            next_intent_2.putExtra("personel_nolari", personnelNumberssa)
+            next_intent_2.putExtra("personel_sifreleri", personnelPasswordssa)
+            next_intent_2.putExtra("personel_adlari", personnelNamessa)
             startActivity(next_intent_2)
         }
     }
