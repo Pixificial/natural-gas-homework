@@ -6,6 +6,8 @@ import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteDatabase.OPEN_READWRITE
 import android.database.sqlite.SQLiteDatabase.openOrCreateDatabase
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -325,6 +327,8 @@ open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFBA4444")))
+        window.statusBarColor = Color.parseColor("#FFBA4444")
         val db = initiateDatabase()
         val continueButton : Button = findViewById(R.id.continue_button)
         val personnelButton : Button = findViewById(R.id.personnel_button)

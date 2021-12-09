@@ -42,6 +42,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/info_text_1" />
 
+    <TextView
+        android:id="@+id/fakering_text"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/blue_ring"
+        android:text="a"
+        android:textColor="@color/imu_blue"
+        android:textSize="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/info_text_5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/info_text_1" />
 
     <TextView
         android:id="@+id/current_bill_text"
@@ -52,7 +64,8 @@
         app:layout_constraintBottom_toTopOf="@+id/info_text_5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/info_text_1" />
+        app:layout_constraintTop_toTopOf="@+id/info_text_1"
+        android:textColor="@color/imu_blue" />
 
     <TextView
         android:id="@+id/info_text_5"
@@ -69,7 +82,7 @@
         android:id="@+id/month_11_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TR69-0000-0000-0000-0000"
+        android:text="TR42-6000-0006-9000-0009"
         app:layout_constraintLeft_toLeftOf="@+id/info_text_5"
         app:layout_constraintTop_toBottomOf="@+id/info_text_5" />
 

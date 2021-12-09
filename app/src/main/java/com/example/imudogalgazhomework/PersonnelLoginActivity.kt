@@ -1,6 +1,8 @@
 package com.example.imudogalgazhomework
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,6 +14,9 @@ class PersonnelLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personnel_login)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF3377BA")))
+        window.statusBarColor = Color.parseColor("#FF3377BA")
+
 
         val personnelNumText : EditText = findViewById(R.id.personnelnum_text)
         val personnelPassText : EditText = findViewById(R.id.personnelpass_text)
@@ -34,12 +39,6 @@ class PersonnelLoginActivity : AppCompatActivity() {
                 }
             }
         }
-
-        //val backButton : Button = findViewById(R.id.back_button)
-        //backButton.setOnClickListener {
-        //    val intent = Intent(this@PersonnelLoginActivity, MainActivity::class.java)
-        //    startActivity(intent)
-        //}
     }
 
     override fun onSupportNavigateUp(): Boolean {

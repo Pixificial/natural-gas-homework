@@ -1,6 +1,8 @@
 package com.example.imudogalgazhomework
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -12,6 +14,9 @@ class SubscriberLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subscriber_login)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FFBA4444")))
+        window.statusBarColor = Color.parseColor("#FFBA4444")
+
 
         val subNameText : TextView = findViewById(R.id.subname_text)
         val subNumText : TextView = findViewById(R.id.subnum_text)

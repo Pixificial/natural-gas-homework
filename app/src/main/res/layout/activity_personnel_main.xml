@@ -14,7 +14,8 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/info_text_2"
-        app:layout_constraintStart_toStartOf="@+id/subnum_text" />
+        app:layout_constraintStart_toStartOf="@+id/subnum_text"
+        android:textColor="@color/imu_blue" />
 
     <EditText
         android:id="@+id/subnum_text"
@@ -32,7 +33,8 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/info_text_1"
         app:layout_constraintStart_toStartOf="@+id/usedm3_text"
-        app:layout_constraintBottom_toTopOf="@+id/info_text_3" />
+        app:layout_constraintBottom_toTopOf="@+id/info_text_3"
+        android:textColor="@color/imu_blue" />
 
     <EditText
         android:id="@+id/usedm3_text"
@@ -49,7 +51,8 @@
         android:text="M3 GAZ FİYATI (TL):"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/m3price_text"
-        app:layout_constraintStart_toStartOf="@+id/m3price_text" />
+        app:layout_constraintStart_toStartOf="@+id/m3price_text"
+        android:textColor="@color/imu_blue" />
 
     <EditText
         android:id="@+id/m3price_text"
@@ -77,6 +80,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/info_text_3"/>
+        app:layout_constraintTop_toTopOf="@+id/info_text_3"
+        android:backgroundTint="@color/imu_blue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

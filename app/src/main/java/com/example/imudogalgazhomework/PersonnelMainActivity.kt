@@ -3,6 +3,8 @@ package com.example.imudogalgazhomework
 import android.content.ContentValues
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase.*
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -12,6 +14,8 @@ class PersonnelMainActivity : MainActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personnel_main)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF3377BA")))
+        window.statusBarColor = Color.parseColor("#FF3377BA")
 
         val monthSpinner : Spinner = findViewById(R.id.month_spinner)
         val months = arrayOf("Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık")
@@ -68,9 +72,6 @@ class PersonnelMainActivity : MainActivity() {
                     )
                 }
             }
-            //db.execSQL("UPDATE aylıkFatura${subNumText.text.toString()} SET AylıkGazKullanımı = ${usedM3Text.text.toString().toFloat()} WHERE Aylar = '${monthSpinner.selectedItem}'")
-            //db.execSQL("UPDATE aylıkFatura${subNumText.text.toString()} SET AyınM3Fiyatı = ${m3PriceText.text.toString().toFloat()} WHERE Aylar = '${monthSpinner.selectedItem}'")
-
         }
     }
 
