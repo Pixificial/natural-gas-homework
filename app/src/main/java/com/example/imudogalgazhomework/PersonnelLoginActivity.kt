@@ -26,8 +26,9 @@ class PersonnelLoginActivity : AppCompatActivity() {
             if (personnelNames != null) {
                 while (i < personnelNames.size) {
                     if (personnelNumText.text.toString() == personnelNumbers!![i] && personnelPassText.text.toString() == personnelPasswords!![i]) {
-                        // goto next screen (which is nonexistent as of now)
-                        //findViewById<TextView>(R.id.system_text).text = personnelNames[i]
+                        val next_intent = Intent(this@PersonnelLoginActivity, PersonnelMainActivity::class.java)
+                        startActivity(next_intent)
+                        break
                     }
                     i++
                 }

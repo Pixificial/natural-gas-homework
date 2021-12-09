@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteDatabase.OPEN_READWRITE
 import android.database.sqlite.SQLiteDatabase.openOrCreateDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,60 +13,28 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Button
 
+open class MainActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity() {
+    companion object {
 
-    fun calculateToplamBorc(db : SQLiteDatabase, tableName : String): Float {
-        var toplamBorc : Float = 0.0F
-        val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
-        val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
-        cMonthlyGasUsages.moveToFirst()
-        cM3Prices.moveToFirst()
-        toplamBorc += cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
-        while (cMonthlyGasUsages.moveToNext() && cM3Prices.moveToNext()) {
-            toplamBorc += cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
-        }
-        return toplamBorc
+
+        fun calculateToplamBorc(db : SQLiteDatabase, tableName : String): Float {
+           var toplamBorc : Float = 0.0F
+           val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
+           val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
+           cMonthlyGasUsages.moveToFirst()
+          cM3Prices.moveToFirst()
+           toplamBorc += cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
+           while (cMonthlyGasUsages.moveToNext() && cM3Prices.moveToNext()) {
+               toplamBorc += cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
+           }
+          return toplamBorc
     }
 
-    fun getAyM3Fiyati(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
-        val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
-        cM3Prices.moveToFirst()
-        var i : Int = 0
-        while (i < monthIndex) {
-            cM3Prices.moveToNext()
-            i += 1
-        }
-        return cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
-    }
-
-    fun getAyM3Kullanimi(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
-        val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
-        cMonthlyGasUsages.moveToFirst()
-        var i : Int = 0
-        while (i < monthIndex) {
-            cMonthlyGasUsages.moveToNext()
-            i += 1
-        }
-        return cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı"))
-    }
-
-    fun getAyFaturasi(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
-        val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
-        val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
-        cMonthlyGasUsages.moveToFirst()
-        cM3Prices.moveToFirst()
-        var i : Int = 0
-        while (i < monthIndex) {
-            cMonthlyGasUsages.moveToNext()
-            cM3Prices.moveToNext()
-            i += 1
-        }
-        return cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
     }
 
     fun initiateDatabase(): SQLiteDatabase {
-        val db = openOrCreateDatabase("dogalgaz_odev_2.db", 0,null)
+        val db = openOrCreateDatabase("ssdfgjsgffgjrtye.db", 0, null)
 
         val af_12345678_1 = ContentValues()
         val af_12345678_2 = ContentValues()
@@ -197,18 +166,18 @@ class MainActivity : AppCompatActivity() {
         af_12345670_11.put("Aylar", "Kasım")
         af_12345670_12.put("Aylar", "Aralık")
 
-        af_12345670_1.put("AylıkGazKullanımı", 83.16)
-        af_12345670_2.put("AylıkGazKullanımı", 81.47)
-        af_12345670_3.put("AylıkGazKullanımı", 72.83)
-        af_12345670_4.put("AylıkGazKullanımı", 79.47)
-        af_12345670_5.put("AylıkGazKullanımı", 73.29)
-        af_12345670_6.put("AylıkGazKullanımı", 61.67)
-        af_12345670_7.put("AylıkGazKullanımı", 97.62)
-        af_12345670_8.put("AylıkGazKullanımı", 85.41)
-        af_12345670_9.put("AylıkGazKullanımı", 91.98)
-        af_12345670_10.put("AylıkGazKullanımı", 94.12)
-        af_12345670_11.put("AylıkGazKullanımı", 69.69)
-        af_12345670_12.put("AylıkGazKullanımı", 72.17)
+        af_12345670_1.put("AylıkGazKullanımı", 83.16F)
+        af_12345670_2.put("AylıkGazKullanımı", 81.47F)
+        af_12345670_3.put("AylıkGazKullanımı", 72.83F)
+        af_12345670_4.put("AylıkGazKullanımı", 79.47F)
+        af_12345670_5.put("AylıkGazKullanımı", 73.29F)
+        af_12345670_6.put("AylıkGazKullanımı", 61.67F)
+        af_12345670_7.put("AylıkGazKullanımı", 97.62F)
+        af_12345670_8.put("AylıkGazKullanımı", 85.41F)
+        af_12345670_9.put("AylıkGazKullanımı", 91.98F)
+        af_12345670_10.put("AylıkGazKullanımı", 94.12F)
+        af_12345670_11.put("AylıkGazKullanımı", 69.69F)
+        af_12345670_12.put("AylıkGazKullanımı", 72.17F)
 
         af_12345670_1.put("AyınM3Fiyatı", 3.0)
         af_12345670_2.put("AyınM3Fiyatı", 3.5)
@@ -308,19 +277,55 @@ class MainActivity : AppCompatActivity() {
             pp_2.put("PersonelSifre", "12345679")
             pp_2.put("PersonelAdSoyad", "Semih Sayacokuyamayan")
 
-            db.execSQL("CREATE TABLE IF NOT EXISTS personelProfili (PersonelNo integer, PersonelSifre varchar(40), PersonelAdSoyad varchar(40))")
+            db.execSQL("CREATE TABLE IF NOT EXISTS personelProfili (PersonelNo integer, PersonelSifre integer, PersonelAdSoyad varchar(40))")
             db.insert("personelProfili", null, pp_1)
             db.insert("personelProfili", null, pp_2)
         }
         return db;
     }
 
+    fun getAyM3Fiyati(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
+        val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
+        cM3Prices.moveToFirst()
+        var i : Int = 0
+        while (i < monthIndex) {
+            cM3Prices.moveToNext()
+            i += 1
+        }
+        return cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
+    }
+
+    fun getAyM3Kullanimi(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
+        val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
+        cMonthlyGasUsages.moveToFirst()
+        var i : Int = 0
+        while (i < monthIndex) {
+            cMonthlyGasUsages.moveToNext()
+            i += 1
+        }
+        return cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı"))
+    }
+
+    fun getAyFaturasi(db: SQLiteDatabase, tableName: String, monthIndex: Int): Float {
+        val cMonthlyGasUsages = db.rawQuery("SELECT AylıkGazKullanımı FROM $tableName", null)
+        val cM3Prices = db.rawQuery("SELECT AyınM3Fiyatı FROM $tableName", null)
+        cMonthlyGasUsages.moveToFirst()
+        cM3Prices.moveToFirst()
+        var i : Int = 0
+        while (i < monthIndex) {
+            cMonthlyGasUsages.moveToNext()
+            cM3Prices.moveToNext()
+            i += 1
+        }
+        return cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı"))
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val db = initiateDatabase()
-
         val continueButton : Button = findViewById(R.id.continue_button)
         val personnelButton : Button = findViewById(R.id.personnel_button)
         val mainSpinner : Spinner = findViewById(R.id.main_spinner)
@@ -330,7 +335,7 @@ class MainActivity : AppCompatActivity() {
         cRowCount.close()
         val names = db.rawQuery("SELECT AboneAdSoyad FROM kullanıcıProfili", null)
         val subNumbers = db.rawQuery("SELECT AboneNo FROM kullanıcıProfili", null)
-        val totalPayments = db.rawQuery("SELECT ToplamBorc FROM kullanıcıProfili", null)
+        var totalPayments = db.rawQuery("SELECT ToplamBorc FROM kullanıcıProfili", null)
         var namessa = arrayOfNulls<String>(rowCount)
         var subNumberssa = arrayOfNulls<String>(rowCount)
         var totalPaymentsfa = arrayOfNulls<Float>(rowCount)
@@ -366,7 +371,7 @@ class MainActivity : AppCompatActivity() {
         val cPersonnelNames = db.rawQuery("SELECT PersonelAdSoyad FROM personelProfili", null)
 
         var personnelNumberssa = arrayOfNulls<String>(personnelRowCount)
-        var personnelPasswordssa = arrayOfNulls<String>(personnelRowCount)
+        var personnelPasswordsia = arrayOfNulls<String>(personnelRowCount)
         var personnelNamessa = arrayOfNulls<String>(personnelRowCount)
 
         cPersonnelNumbers.moveToFirst()
@@ -374,14 +379,14 @@ class MainActivity : AppCompatActivity() {
         cPersonnelNames.moveToFirst()
 
         personnelNumberssa[i] = cPersonnelNumbers.getString(cPersonnelNumbers.getColumnIndexOrThrow("PersonelNo"))
-        personnelPasswordssa[i] = cPersonnelPasswords.getString(cPersonnelPasswords.getColumnIndexOrThrow("PersonelSifre"))
+        personnelPasswordsia[i] = cPersonnelPasswords.getString(cPersonnelPasswords.getColumnIndexOrThrow("PersonelSifre"))
         personnelNamessa[i] = cPersonnelNames.getString(cPersonnelNames.getColumnIndexOrThrow("PersonelAdSoyad"))
 
         while (cPersonnelNumbers.moveToNext() && cPersonnelPasswords.moveToNext() && cPersonnelNames.moveToNext())
         {
             i += 1
             personnelNumberssa[i] = cPersonnelNumbers.getString(cPersonnelNumbers.getColumnIndexOrThrow("PersonelNo"))
-            personnelPasswordssa[i] = cPersonnelPasswords.getString(cPersonnelPasswords.getColumnIndexOrThrow("PersonelSifre"))
+            personnelPasswordsia[i] = cPersonnelPasswords.getString(cPersonnelPasswords.getColumnIndexOrThrow("PersonelSifre"))
             personnelNamessa[i] = cPersonnelNames.getString(cPersonnelNames.getColumnIndexOrThrow("PersonelAdSoyad"))
         }
 
@@ -394,10 +399,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 i += 1
             }
+
             val next_intent_1 = Intent(this@MainActivity, SubscriberLoginActivity::class.java)
             next_intent_1.putExtra("abone_adi", mainSpinner.selectedItem.toString())
             next_intent_1.putExtra("abone_no", subNumberssa[i])
-            next_intent_1.putExtra("abone_borcu", totalPaymentsfa[i])
+            next_intent_1.putExtra("abone_borcu", calculateToplamBorc(db, "aylıkFatura${subNumberssa[i]}"))
             next_intent_1.putExtra("ayin_m3_fiyati", getAyM3Fiyati(db, "aylıkFatura" + subNumberssa[i], 11))
             next_intent_1.putExtra("ayin_m3_kullanimi", getAyM3Kullanimi(db, "aylıkFatura" + subNumberssa[i], 11))
             next_intent_1.putExtra("ay_9_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 9))
@@ -409,7 +415,7 @@ class MainActivity : AppCompatActivity() {
         personnelButton.setOnClickListener {
             val next_intent_2 = Intent(this@MainActivity, PersonnelLoginActivity::class.java)
             next_intent_2.putExtra("personel_nolari", personnelNumberssa)
-            next_intent_2.putExtra("personel_sifreleri", personnelPasswordssa)
+            next_intent_2.putExtra("personel_sifreleri", personnelPasswordsia)
             next_intent_2.putExtra("personel_adlari", personnelNamessa)
             startActivity(next_intent_2)
         }
