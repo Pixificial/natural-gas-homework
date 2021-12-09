@@ -1,6 +1,6 @@
 # Natural Gas Homework
 This is a basic natural gas mobile application project.
-![Screenshot of the app and the working environment.](/screen.jpg?raw=true "Screenshot")
+![Screenshot of the app and the working environment.](/screen1.jpg?raw=true "Screenshot")
 ![Screenshot of a few screens.](/screen2.jpg?raw=true "Screenshot #2")
 ![Screenshot of a few more screens.](/screen3.jpg?raw=true "Screenshot #3")
 
