@@ -17,7 +17,7 @@ class SubscriberBillPaymentActivity : AppCompatActivity() {
         val continueButton : Button = findViewById(R.id.continue_button)
         val currentBillText : TextView = findViewById(R.id.current_bill_text)
 
-        currentBillText.text = intent.getFloatExtra("ay_11_faturasi", 0.0F).toString()
+        currentBillText.text = "%.2f".format(intent.getFloatExtra("ay_11_faturasi", 0.0F))
 
         continueButton.setOnClickListener {
             val url_intent = Intent(Intent.ACTION_VIEW)

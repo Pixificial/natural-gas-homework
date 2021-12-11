@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Button
+import android.widget.Toast
 
 open class MainActivity : AppCompatActivity() {
 
@@ -36,7 +37,7 @@ open class MainActivity : AppCompatActivity() {
     }
 
     fun initiateDatabase(): SQLiteDatabase {
-        val db = openOrCreateDatabase("ssdfgjsgffgjrtye.db", 0, null)
+        val db = openOrCreateDatabase("dg_odev_6.db", 0, null)
 
         val af_12345678_1 = ContentValues()
         val af_12345678_2 = ContentValues()
@@ -341,6 +342,7 @@ open class MainActivity : AppCompatActivity() {
         val subNumbers = db.rawQuery("SELECT AboneNo FROM kullanıcıProfili", null)
         var totalPayments = db.rawQuery("SELECT ToplamBorc FROM kullanıcıProfili", null)
         var namessa = arrayOfNulls<String>(rowCount)
+        var cbnamessa = arrayOfNulls<String>(rowCount + 1)
         var subNumberssa = arrayOfNulls<String>(rowCount)
         var totalPaymentsfa = arrayOfNulls<Float>(rowCount)
 
@@ -348,6 +350,9 @@ open class MainActivity : AppCompatActivity() {
 
         names.moveToFirst()
         namessa[i] = names.getString(names.getColumnIndexOrThrow("AboneAdSoyad"))
+        cbnamessa[i] = "Seçin"
+        cbnamessa[i + 1] = names.getString(names.getColumnIndexOrThrow("AboneAdSoyad"))
+
         subNumbers.moveToFirst()
         subNumberssa[i] = subNumbers.getString(subNumbers.getColumnIndexOrThrow("AboneNo"))
         totalPayments.moveToFirst()
@@ -356,10 +361,11 @@ open class MainActivity : AppCompatActivity() {
         {
             i += 1
             namessa[i] = names.getString(names.getColumnIndexOrThrow("AboneAdSoyad"))
+            cbnamessa[i + 1] = names.getString(names.getColumnIndexOrThrow("AboneAdSoyad"))
             subNumberssa[i] = subNumbers.getString(subNumbers.getColumnIndexOrThrow("AboneNo"))
             totalPaymentsfa[i] = totalPayments.getFloat(totalPayments.getColumnIndexOrThrow("ToplamBorc"))
         }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, namessa)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cbnamessa)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mainSpinner.adapter = adapter
 
@@ -395,25 +401,31 @@ open class MainActivity : AppCompatActivity() {
         }
 
         continueButton.setOnClickListener {
-            var i = 0
-            while(i < rowCount) {
-                if(namessa[i] == mainSpinner.selectedItem.toString())
-                {
-                    break
+            if (mainSpinner.selectedItem.toString() == cbnamessa[0]) {
+                Toast.makeText(this, "Lütfen kullanıcı seçin!", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                var i = 0
+                while(i < rowCount) {
+                    if(namessa[i] == mainSpinner.selectedItem.toString())
+                    {
+                        break
+                    }
+                    i += 1
                 }
-                i += 1
+
+                val next_intent_1 = Intent(this@MainActivity, SubscriberLoginActivity::class.java)
+                next_intent_1.putExtra("abone_adi", mainSpinner.selectedItem.toString())
+                next_intent_1.putExtra("abone_no", subNumberssa[i])
+                next_intent_1.putExtra("abone_borcu", calculateToplamBorc(db, "aylıkFatura${subNumberssa[i]}"))
+                next_intent_1.putExtra("ayin_m3_fiyati", getAyM3Fiyati(db, "aylıkFatura" + subNumberssa[i], 11))
+                next_intent_1.putExtra("ayin_m3_kullanimi", getAyM3Kullanimi(db, "aylıkFatura" + subNumberssa[i], 11))
+                next_intent_1.putExtra("ay_9_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 9))
+                next_intent_1.putExtra("ay_10_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 10))
+                next_intent_1.putExtra("ay_11_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 11))
+                startActivity(next_intent_1)
             }
 
-            val next_intent_1 = Intent(this@MainActivity, SubscriberLoginActivity::class.java)
-            next_intent_1.putExtra("abone_adi", mainSpinner.selectedItem.toString())
-            next_intent_1.putExtra("abone_no", subNumberssa[i])
-            next_intent_1.putExtra("abone_borcu", calculateToplamBorc(db, "aylıkFatura${subNumberssa[i]}"))
-            next_intent_1.putExtra("ayin_m3_fiyati", getAyM3Fiyati(db, "aylıkFatura" + subNumberssa[i], 11))
-            next_intent_1.putExtra("ayin_m3_kullanimi", getAyM3Kullanimi(db, "aylıkFatura" + subNumberssa[i], 11))
-            next_intent_1.putExtra("ay_9_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 9))
-            next_intent_1.putExtra("ay_10_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 10))
-            next_intent_1.putExtra("ay_11_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 11))
-            startActivity(next_intent_1)
         }
 
         personnelButton.setOnClickListener {

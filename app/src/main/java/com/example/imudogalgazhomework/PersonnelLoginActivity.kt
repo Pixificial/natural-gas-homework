@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import java.lang.NumberFormatException
 
 class PersonnelLoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,16 +29,48 @@ class PersonnelLoginActivity : AppCompatActivity() {
         val personnelNames = intent.getStringArrayExtra("personel_adlari")
 
         continueButton.setOnClickListener {
-            var i = 0
-            if (personnelNames != null) {
-                while (i < personnelNames.size) {
-                    if (personnelNumText.text.toString() == personnelNumbers!![i] && personnelPassText.text.toString() == personnelPasswords!![i]) {
-                        val next_intent = Intent(this@PersonnelLoginActivity, PersonnelMainActivity::class.java)
-                        startActivity(next_intent)
-                        break
-                    }
-                    i++
+            var personnelNumTextNotInvalid = true
+
+            try {
+                personnelNumText.text.toString().toFloat()
+            } catch(e: NumberFormatException) {
+                personnelNumTextNotInvalid = false
+            }
+
+            if (personnelNumTextNotInvalid) {
+
+                var personnelPassTextNotInvalid = true
+
+                try {
+                    personnelPassText.text.toString().toFloat()
+                } catch(e: NumberFormatException) {
+                    personnelPassTextNotInvalid = false
                 }
+
+                if (personnelPassTextNotInvalid) {
+                    var noMatch = true
+                    var i = 0
+                    if (personnelNames != null) {
+                        while (i < personnelNames.size) {
+                            if (personnelNumText.text.toString() == personnelNumbers!![i] && personnelPassText.text.toString() == personnelPasswords!![i]) {
+                                noMatch = false
+                                val next_intent = Intent(this@PersonnelLoginActivity, PersonnelMainActivity::class.java)
+                                startActivity(next_intent)
+                                break
+                            }
+                            i++
+                        }
+                        if (noMatch) {
+                            Toast.makeText(this, "Personel numarası ve personel şifresi uyuşmuyor!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                else {
+                    Toast.makeText(this, "Personel şifresi doğru formatta değil!", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else {
+                Toast.makeText(this, "Personel numarası doğru formatta değil!", Toast.LENGTH_SHORT).show()
             }
         }
     }

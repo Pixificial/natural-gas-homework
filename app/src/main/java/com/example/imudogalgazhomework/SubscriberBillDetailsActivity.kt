@@ -21,13 +21,13 @@ class SubscriberBillDetailsActivity : AppCompatActivity() {
         val extras : Bundle? = intent.extras
 
 
-        m3PriceText.text = intent.getFloatExtra("ayin_m3_fiyati", 0.0F).toString()
-        usedM3Text.text = intent.getFloatExtra("ayin_m3_kullanimi", 0.0F).toString()
-        currentBillText.text = intent.getFloatExtra("ay_11_faturasi", 0.0F).toString()
-        totalBillText.text = intent.getFloatExtra("abone_borcu", 0.0F).toString()
-        month9BillText.text = intent.getFloatExtra("ay_9_faturasi", 0.0F).toString()
-        month10BillText.text = intent.getFloatExtra("ay_10_faturasi", 0.0F).toString()
-        month11BillText.text = intent.getFloatExtra("ay_11_faturasi", 0.0F).toString()
+        m3PriceText.text = "%.2f".format(intent.getFloatExtra("ayin_m3_fiyati", 0.0F))
+        usedM3Text.text = "%.2f".format(intent.getFloatExtra("ayin_m3_kullanimi", 0.0F))
+        currentBillText.text = "%.2f".format(intent.getFloatExtra("ay_11_faturasi", 0.0F))
+        totalBillText.text = "%.2f".format(intent.getFloatExtra("abone_borcu", 0.0F))
+        month9BillText.text = "%.2f".format(intent.getFloatExtra("ay_9_faturasi", 0.0F))
+        month10BillText.text = "%.2f".format(intent.getFloatExtra("ay_10_faturasi", 0.0F))
+        month11BillText.text = "%.2f".format(intent.getFloatExtra("ay_11_faturasi", 0.0F))
     }
 
     override fun onSupportNavigateUp(): Boolean {

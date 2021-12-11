@@ -19,7 +19,7 @@ class SubscriberMainActivity : AppCompatActivity() {
         val payButton : Button = findViewById(R.id.pay_button)
 
         subNameText.text = intent.getStringExtra("abone_adi")
-        totalBillText.text = intent.getFloatExtra("abone_borcu", 0.5F).toString()
+        totalBillText.text = "%.2f TL".format(intent.getFloatExtra("abone_borcu", 0.5F))
 
         continueButton.setOnClickListener {
             val next_intent = Intent(this@SubscriberMainActivity, SubscriberBillDetailsActivity::class.java)
