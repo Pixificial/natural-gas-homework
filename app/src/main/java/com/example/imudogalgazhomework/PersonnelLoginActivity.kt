@@ -51,7 +51,18 @@ class PersonnelLoginActivity : AppCompatActivity() {
                     var noMatch = true
                     var i = 0
                     if (personnelNames != null) {
+                        var nummLengthNotInvalid = true
+                        var passLengthNotInvalid = true
                         while (i < personnelNames.size) {
+
+                            if (personnelNumText.text.toString().length != personnelNumbers!![i].length) {
+                                nummLengthNotInvalid = false
+                                break
+                            }
+                            if (personnelPassText.text.toString().length != personnelPasswords!![i].length) {
+                                passLengthNotInvalid = false
+                                break
+                            }
                             if (personnelNumText.text.toString() == personnelNumbers!![i] && personnelPassText.text.toString() == personnelPasswords!![i]) {
                                 noMatch = false
                                 val next_intent = Intent(this@PersonnelLoginActivity, PersonnelMainActivity::class.java)
@@ -60,7 +71,15 @@ class PersonnelLoginActivity : AppCompatActivity() {
                             }
                             i++
                         }
-                        if (noMatch) {
+                        if (!nummLengthNotInvalid) {
+                            Toast.makeText(this, "Personel numarası doğru uzunlukta değil!", Toast.LENGTH_SHORT).show()
+
+                        }
+                        else if (!passLengthNotInvalid) {
+                            Toast.makeText(this, "Personel şifresi doğru uzunlukta değil!", Toast.LENGTH_SHORT).show()
+
+                        }
+                        else if (noMatch) {
                             Toast.makeText(this, "Personel numarası ve personel şifresi uyuşmuyor!", Toast.LENGTH_SHORT).show()
                         }
                     }
