@@ -37,7 +37,7 @@ open class MainActivity : AppCompatActivity() {
     }
 
     fun initiateDatabase(): SQLiteDatabase {
-        val db = openOrCreateDatabase("dg_odev_6.db", 0, null)
+        val db = openOrCreateDatabase("dg_odev_8.db", 0, null)
 
         val af_12345678_1 = ContentValues()
         val af_12345678_2 = ContentValues()
@@ -418,8 +418,17 @@ open class MainActivity : AppCompatActivity() {
                 next_intent_1.putExtra("abone_adi", mainSpinner.selectedItem.toString())
                 next_intent_1.putExtra("abone_no", subNumberssa[i])
                 next_intent_1.putExtra("abone_borcu", calculateToplamBorc(db, "aylıkFatura${subNumberssa[i]}"))
-                next_intent_1.putExtra("ayin_m3_fiyati", getAyM3Fiyati(db, "aylıkFatura" + subNumberssa[i], 11))
-                next_intent_1.putExtra("ayin_m3_kullanimi", getAyM3Kullanimi(db, "aylıkFatura" + subNumberssa[i], 11))
+                next_intent_1.putExtra("ayin_m3_fiyati", getAyM3Fiyati(db, "aylıkFatura" + subNumberssa[i], 0))
+                next_intent_1.putExtra("ayin_m3_kullanimi", getAyM3Kullanimi(db, "aylıkFatura" + subNumberssa[i], 0))
+                next_intent_1.putExtra("ay_0_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 0))
+                next_intent_1.putExtra("ay_1_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 1))
+                next_intent_1.putExtra("ay_2_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 2))
+                next_intent_1.putExtra("ay_3_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 3))
+                next_intent_1.putExtra("ay_4_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 4))
+                next_intent_1.putExtra("ay_5_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 5))
+                next_intent_1.putExtra("ay_6_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 6))
+                next_intent_1.putExtra("ay_7_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 7))
+                next_intent_1.putExtra("ay_8_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 8))
                 next_intent_1.putExtra("ay_9_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 9))
                 next_intent_1.putExtra("ay_10_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 10))
                 next_intent_1.putExtra("ay_11_faturasi", getAyFaturasi(db, "aylıkFatura" + subNumberssa[i], 11))

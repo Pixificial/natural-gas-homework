@@ -61,7 +61,7 @@ class PersonnelMainActivity : MainActivity() {
                     val af = ContentValues()
                     af.put("AylıkGazKullanımı", usedM3Text.text.toString().toFloat())
                     af.put("AyınM3Fiyatı", m3PriceText.text.toString().toFloat())
-                    val db = openOrCreateDatabase("dg_odev_6.db", 0, null)
+                    val db = openOrCreateDatabase("dg_odev_8.db", 0, null)
                     val cTableExists = db.rawQuery(
                         "SELECT DISTINCT tbl_name from sqlite_master WHERE tbl_name = 'aylıkFatura${subNumText.text.toString()}'",
                         null
@@ -69,22 +69,12 @@ class PersonnelMainActivity : MainActivity() {
 
 
                     if (cTableExists.count >= 1) {
-                        db.update(
-                            "aylıkFatura${subNumText.text.toString()}",
-                            af,
-                            "Aylar = '${monthSpinner.selectedItem}'",
-                            null
-                        )
-
-                        val kp = ContentValues()
-                        kp.put("ToplamBorc", calculateToplamBorc(db, "aylıkFatura${subNumText.text.toString()}"))
-                        db.update(
-                            "kullanıcıProfili",
-                            kp,
-                            "AboneNo = '${subNumText.text.toString()}'",
-                            null
-                        )
-                        Toast.makeText(this, "Fatura bilgisi başarıyla güncellendi.", Toast.LENGTH_SHORT).show()
+                        val next_intent = Intent(this@PersonnelMainActivity, PersonnelPhotoUploadingActivity::class.java)
+                        next_intent.putExtra("aylik_gaz_kullanimi", usedM3Text.text.toString().toFloat())
+                        next_intent.putExtra("abone_no", subNumText.text.toString())
+                        next_intent.putExtra("ay", monthSpinner.selectedItem.toString())
+                        next_intent.putExtra("ayin_m3_kullanimi", m3PriceText.text.toString().toFloat())
+                        startActivity(next_intent)
                     }
                     else {
                         Toast.makeText(this, "Belirtilen abone numarasıyla kayıtlı bir abone bulunamadı!", Toast.LENGTH_SHORT).show()

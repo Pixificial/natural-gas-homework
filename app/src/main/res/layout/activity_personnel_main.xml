@@ -76,7 +76,7 @@
         android:layout_width="280dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:text="İşlemi Tamamla"
+        android:text="İşleme Devam Et"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
