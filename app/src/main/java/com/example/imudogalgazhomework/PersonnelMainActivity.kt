@@ -61,7 +61,7 @@ class PersonnelMainActivity : MainActivity() {
                     val af = ContentValues()
                     af.put("AylıkGazKullanımı", usedM3Text.text.toString().toFloat())
                     af.put("AyınM3Fiyatı", m3PriceText.text.toString().toFloat())
-                    val db = openOrCreateDatabase("dg_odev_8.db", 0, null)
+                    val db = openOrCreateDatabase("dg_odev_9.db", 0, null)
                     val cTableExists = db.rawQuery(
                         "SELECT DISTINCT tbl_name from sqlite_master WHERE tbl_name = 'aylıkFatura${subNumText.text.toString()}'",
                         null

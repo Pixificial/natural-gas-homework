@@ -23,7 +23,7 @@ class SubscriberBillDetailsActivity : AppCompatActivity() {
 
         m3PriceText.text = "%.2f".format(intent.getFloatExtra("ayin_m3_fiyati", 0.0F))
         usedM3Text.text = "%.2f".format(intent.getFloatExtra("ayin_m3_kullanimi", 0.0F))
-        currentBillText.text = "%.2f".format(intent.getFloatExtra("ay_11_faturasi", 0.0F))
+        currentBillText.text = "%.2f".format(intent.getFloatExtra("ay_0_faturasi", 0.0F))
         totalBillText.text = "%.2f".format(intent.getFloatExtra("abone_borcu", 0.0F))
         month9BillText.text = "%.2f".format(intent.getFloatExtra("ay_10_faturasi", 0.0F))
         month10BillText.text = "%.2f".format(intent.getFloatExtra("ay_11_faturasi", 0.0F))

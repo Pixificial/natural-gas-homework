@@ -37,7 +37,7 @@ open class MainActivity : AppCompatActivity() {
     }
 
     fun initiateDatabase(): SQLiteDatabase {
-        val db = openOrCreateDatabase("dg_odev_8.db", 0, null)
+        val db = openOrCreateDatabase("dg_odev_9.db", 0, null)
 
         val af_12345678_1 = ContentValues()
         val af_12345678_2 = ContentValues()

@@ -35,7 +35,7 @@ class SubscriberBillPaymentActivity : AppCompatActivity(), AdapterView.OnItemSel
         val continueButton : Button = findViewById(R.id.continue_button)
         val totalBillText : TextView = findViewById(R.id.total_bill_text)
 
-        db = openOrCreateDatabase("dg_odev_8.db", 0, null)
+        db = openOrCreateDatabase("dg_odev_9.db", 0, null)
 
 
         totalBillText.text = "%.2f".format(intent.getFloatExtra("abone_borcu", 0.0F))
@@ -121,7 +121,7 @@ class SubscriberBillPaymentActivity : AppCompatActivity(), AdapterView.OnItemSel
             val cM3Prices = db!!.rawQuery("SELECT AyınM3Fiyatı FROM aylıkFatura${intent.getStringExtra("abone_no")} WHERE Aylar = '${monthSpinner!!.selectedItem.toString()}'", null)
             cMonthlyGasUsages.moveToFirst()
             cM3Prices.moveToFirst()
-            monthBillText!!.text = "%.2f".format(cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı")))
+            monthBillText!!.text = "%.2f".format(cMonthlyGasUsages.getFloat(cMonthlyGasUsages.getColumnIndexOrThrow("AylıkGazKullanımı")) * cM3Prices.getFloat(cM3Prices.getColumnIndexOrThrow("AyınM3Fiyatı")) - 0.01F)
             monthBillInfoText!!.text = monthSpinner!!.selectedItem.toString() + " Ayı Fatura:"
         }
         else {

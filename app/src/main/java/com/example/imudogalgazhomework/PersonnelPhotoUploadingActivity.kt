@@ -19,7 +19,7 @@ class PersonnelPhotoUploadingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personnel_photo_uploading)
 
-        val db = openOrCreateDatabase("dg_odev_8.db", 0, null)
+        val db = openOrCreateDatabase("dg_odev_9.db", 0, null)
 
         photoImage = findViewById(R.id.uploaded_picture)
         val uploadButton : Button = findViewById(R.id.upload_button)
