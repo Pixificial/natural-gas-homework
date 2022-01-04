@@ -3,6 +3,8 @@ package com.example.imudogalgazhomework
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -18,6 +20,9 @@ class PersonnelPhotoUploadingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personnel_photo_uploading)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#FF3377BA")))
+        window.statusBarColor = Color.parseColor("#FF3377BA")
 
         val db = openOrCreateDatabase("dg_odev_9.db", 0, null)
 
